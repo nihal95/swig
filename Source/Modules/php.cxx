@@ -1015,18 +1015,8 @@ public:
     if (constructor) {
       String *constructorPrefix = NewString("new");
       wname = getWrapperMethodName(constructorPrefix, symname);
-
-      //Remove namespace addition for checking
-     /* String *replaceString = NewString(":");
-      Append(replaceString, NewString(strrchr(Char(class_type), ':')));
-      String *classTypeNamespace = NewString(class_type);
-      Replace(classTypeNamespace, replaceString, "", DOH_REPLACE_FIRST);
-      Replace(classTypeNamespace, "::", "", DOH_REPLACE_ANY);*/
-
-      wname = getWrapperMethodName(classTypeNamespace, wname);
-      //Printf(f->code, "asd %s %s %s %s %s\n", classTypeNamespace, class_type, wname, Getattr(n, "name"), symname );
-      if (Cmp(wname, Getattr(n, "name")) != 0)
-        constructorRenameOverload = (is_overloaded(n) && !is_complex_name(GetChar(n, "name")) && !Getattr("copy_constructor"));
+      if (is_overloaded(n) && Cmp(wname, Getattr(n, "name")) != 0)
+        constructorRenameOverload = true;
       if (!constructorRenameOverload)
         wname = NewString("__construct");
     }
