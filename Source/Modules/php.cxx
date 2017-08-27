@@ -1666,7 +1666,7 @@ public:
       String *constructorWrapperName = NewString("new_");
       Append(constructorWrapperName, name);
       if (Cmp(constructorWrapperName, iname) != 0) {
-        constructorRenameOverload = (is_overloaded(n) && !is_complex_name(GetChar(n, "name")));
+        constructorRenameOverload = true;
       }
     }
 
